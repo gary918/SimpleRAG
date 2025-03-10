@@ -1,0 +1,10 @@
+.env
+.venv
+.webui_secret_key
+
+data
+files
+vectordb
+
+__pycache__
+.DS_Store

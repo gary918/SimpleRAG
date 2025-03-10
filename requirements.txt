@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain_experimental
+langchain-openai
+sentence-transformers
+unstructured
+pdfminer
+faiss-cpu
+
+st-pages
