@@ -71,6 +71,13 @@ class RAGHelper:
         llm = Ollama(model=self.llm_model_name)
         return RetrievalQA.from_chain_type(llm, retriever=retriever)
 
+    def query(self, query):
+        qa_chain = self.get_qa_chain()
+        response = qa_chain.invoke(query)
+        return response["result"]
+        
+        
+        
     def delete_source(self, selected_ids):
         print('.........delete_source:', selected_ids)
         self.vector_db.delete(selected_ids)
