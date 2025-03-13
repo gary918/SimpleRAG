@@ -1,4 +1,13 @@
 # SimpleRAG
+This is a simple RAG sample based on:
+* LangChain
+* Ollama
+* Chroma
+
+Which can be run by using:
+* Streamlit
+* React + FastAPI
+
 ## Install Ollama
 ### Deploy models
 ## Install python libraries
