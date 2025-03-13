@@ -10,7 +10,21 @@ Edit .env file in the src directory.
 VECTORDB_PERSIST_DIRCTORY = "../vectordb"
 LLM_MODEL_NAME = "deepseek-r1:1.5b"
 ```
-## Run
+## Run Streamlit
 ```cd src```
 
 ```streamlit run app.py```
+
+## Run FastAPI
+
+```uvicorn api.app:app```
+
+Acess the API docs page at http://localhost:8000/docs 
+
+## Run React
+
+```cd frontend```
+
+```npm start```
+
+Access the web page at http://localhost:3000 

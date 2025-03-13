@@ -8,6 +8,8 @@ from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain_community.llms import Ollama
+from langchain.prompts import PromptTemplate
+
 import os
 import tempfile
 from langchain_community.vectorstores.chroma import Chroma
@@ -67,15 +69,27 @@ class RAGHelper:
         self.vector_db = Chroma.from_documents(documents, self.embedder, persist_directory=self.vector_db_persist_directory)
         
     def get_qa_chain(self):
+        prompt_template = """
+            Please carefully analyze the following text: {context}
+            Identify the skills, employers, and contact information for each person in bulletin items.
+            Keep the whole summary less than 200 words.
+            """
+
+        PROMPT = PromptTemplate(
+            template=prompt_template,
+            input_variables=["context"]
+        )
         retriever = self.get_retirever()
         llm = Ollama(model=self.llm_model_name)
-        return RetrievalQA.from_chain_type(llm, retriever=retriever)
+        return RetrievalQA.from_chain_type(
+            llm, 
+            retriever=retriever, 
+            chain_type_kwargs={"prompt": PROMPT})
 
     def query(self, query):
         qa_chain = self.get_qa_chain()
         response = qa_chain.invoke(query)
         return response["result"]
-        
         
         
     def delete_source(self, selected_ids):
